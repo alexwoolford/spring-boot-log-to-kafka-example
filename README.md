@@ -1,6 +1,6 @@
 # Spring Boot: how to log to Kafka
 
-Kafka is ideal for log aggregation, particularly for applications that use microservices that are distributed across multiple hosts.
+Kafka is ideal for log aggregation, particularly for applications that use microservices and are distributed across multiple hosts.
 
 This is an example Spring Boot application that uses [Log4j2's Kafka appender](https://logging.apache.org/log4j/2.x/manual/appenders.html#KafkaAppender) to send JSON formatted log messages to a Kafka topic.
 
@@ -19,4 +19,5 @@ This application runs for 10 seconds and sends some log messages to a Kafka topi
     }
 
 To do:
-1. include the host name in  the log message
+
+1) include the host name in  the log message
