@@ -14,6 +14,7 @@ public class TimeBomb {
     @Scheduled(fixedDelay = 1000L)
     void wait10SecondsExitApplication(){
 
+        logger.error("Sample error message");
         try {
             Thread.sleep(10000);
         } catch(InterruptedException ex) {

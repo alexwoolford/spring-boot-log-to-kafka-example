@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info" name="spring-boot-log-to-kafka-example" packages="io.woolford">
+    <Appenders>
+        <Kafka name="kafkaAppender" topic="logs">
+            <JSONLayout />
+            <Property name="bootstrap.servers">hdp-single-node:6667</Property>
+        </Kafka>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="kafkaAppender"/>
+        </Root>
+        <Logger name="org.apache.kafka" level="WARN" />
+    </Loggers>
+</Configuration>
