@@ -13,6 +13,7 @@
     <groupId>io.woolford</groupId>
     <artifactId>spring-boot-log-to-kafka-example</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <start-class>io.woolford.Application</start-class>
@@ -61,16 +62,8 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <fork>true</fork>
-                    <mainClass>${start-class}</mainClass>
+                    <executable>true</executable>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
