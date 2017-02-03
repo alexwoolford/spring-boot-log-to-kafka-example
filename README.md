@@ -18,6 +18,9 @@ This application runs for 10 seconds and sends some log messages to a Kafka topi
       "threadPriority" : 5
     }
 
+Here's a two-minute video that walks through the code:
+[![logging to Kafka from Spring video walk-through](https://img.youtube.com/vi/G7wMwEDkX_4/0.jpg)](https://www.youtube.com/watch?v=G7wMwEDkX_4)
+
 To do:
 
 1) include the host name in  the log message
