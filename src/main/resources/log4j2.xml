@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="info" name="spring-boot-log-to-kafka-example" packages="io.woolford">
+
     <Appenders>
         <Kafka name="kafkaAppender" topic="logs">
             <JSONLayout />
-            <Property name="bootstrap.servers">hdp-single-node:6667</Property>
+            <Property name="bootstrap.servers">cp01.woolford.io:9092,cp02.woolford.io:9092,cp03.woolford.io:9092</Property>
         </Kafka>
 
         <!--stdout/stderr included for testing Oozie log4j edits-->
