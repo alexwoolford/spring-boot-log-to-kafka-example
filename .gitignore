@@ -1,3 +1,10 @@
 *.iml
 target/
 .idea/
+
+# Visual Code
+.settings/
+.vscode/
+.project
+.classpath
+.factorypath
