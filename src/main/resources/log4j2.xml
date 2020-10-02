@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="info" name="spring-boot-log-to-kafka-example" packages="io.woolford">
+    <Properties>
+        <Property name="bootstrap.servers">localhost:9092</Property>
+        <Property name="audit.logmarker">AuditRecord</Property>
+        <Property name="kafka.topic.audit">audit</Property>
+        <Property name="kafka.topic.logs">logs</Property>
+    </Properties>
 
     <!-- Log4J2 JSONLayout objectMessageAsJsonObject not exposed through SLF4j 10/2020 --> 
     <Appenders>
         <!-- Kafka Audit Appender only forwards p messages with the "AuditRecord" marker -->
         <!-- We put only the message here assuming it will be formatted json-->
-        <Kafka name="kafkaAuditAppender" topic="audit">
+        <Kafka name="kafkaAuditAppender" topic="${kafka.topic.audit}">
             <PatternLayout pattern="%message%n"/>
-            <Property name="bootstrap.servers">localhost:9092</Property>
-            <MarkerFilter marker="AuditRecord" onMatch="ACCEPT" onMismatch="DENY"/>
+            <Property name="bootstrap.servers">${bootstrap.servers}</Property>
+            <MarkerFilter marker="${audit.logmarker}" onMatch="ACCEPT" onMismatch="DENY"/>
         </Kafka>
 
         <!-- https://logging.apache.org/log4j/2.x/manual/configuration.html#PropertySubstitution -->
@@ -17,22 +23,22 @@
 
         <!-- Kafka Logging Appender forwards all non audit to kafka -->
         <!-- JSONLayout logs with default logging fields , message is a single JSON field -->
-        <Kafka name="kafkaLogAppender" topic="logs">
+        <Kafka name="kafkaLogAppender" topic="${kafka.topic.logs}">
             <JSONLayout />
-            <Property name="bootstrap.servers">localhost:9092</Property>
-            <MarkerFilter marker="AuditRecord" onMatch="DENY" onMismatch="ACCEPT"/>
+            <Property name="bootstrap.servers">${bootstrap.servers}</Property>
+            <MarkerFilter marker="${audit.logmarker}" onMatch="DENY" onMismatch="ACCEPT"/>
         </Kafka>
 
         <Console name="stdout" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} stdout %highlight{%-5p} [%-7t] %F:%L - %m%n"/>
-            <MarkerFilter marker="AuditRecord" onMatch="DENY" onMismatch="ACCEPT"/>
+            <MarkerFilter marker="${audit.logmarker}" onMatch="DENY" onMismatch="ACCEPT"/>
         </Console>
 
         <Console name="stderr" target="SYSTEM_ERR">
             <PatternLayout pattern="%d{HH:mm:ss.SSS} stderr %highlight{%-5p} [%-7t] %F:%L - %highlight{%m}%n"/>
             <Filters>
                 <ThresholdFilter level="WARN" onMatch="ACCEPT" />
-                <MarkerFilter marker="AuditRecord" onMatch="DENY" onMismatch="ACCEPT"/>
+                <MarkerFilter marker="${audit.logmarker}" onMatch="DENY" onMismatch="ACCEPT"/>
             </Filters>
         </Console>
 

@@ -1,8 +1,5 @@
 package io.woolford;
 
-import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
@@ -18,11 +15,10 @@ public class LogMessageGenerator {
     AtomicInteger count = new AtomicInteger(1);
 
     @Scheduled(fixedDelay = 1000L)
-    void logSomeStuff()  {
+    void logSomeStuff() {
 
-        int index = count.getAndIncrement();        
-        logger.info("Log message generated "+index);        
+        int index = count.getAndIncrement();
+        logger.info("Log message generated " + index);
     }
-
 
 }

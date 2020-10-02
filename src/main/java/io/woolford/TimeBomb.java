@@ -12,16 +12,16 @@ public class TimeBomb {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    AtomicInteger count= new AtomicInteger(1);
+    AtomicInteger count = new AtomicInteger(1);
 
     @Scheduled(fixedDelay = 1000L)
-    void wait10SecondsExitApplication(){
+    void wait10SecondsExitApplication() {
 
-        logger.error("Sample error message "+count.getAndIncrement());
+        logger.error("Sample error message " + count.getAndIncrement());
         try {
             logger.info("Will exit in 10");
             Thread.sleep(10000);
-        } catch(InterruptedException ex) {
+        } catch (InterruptedException ex) {
             Thread.currentThread().interrupt();
         } finally {
             logger.info("Closing application");
