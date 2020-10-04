@@ -9,7 +9,7 @@
 
     <!-- Log4J2 JSONLayout objectMessageAsJsonObject not exposed through SLF4j 10/2020 --> 
     <Appenders>
-        <!-- Kafka Audit Appender only forwards p messages with the "AuditRecord" marker -->
+        <!-- Kafka Audit Appender only forwards messages with the "AuditRecord" marker -->
         <!-- We put only the message here assuming it will be formatted json-->
         <Kafka name="kafkaAuditAppender" topic="${kafka.topic.audit}">
             <PatternLayout pattern="%message%n"/>

@@ -4,7 +4,11 @@ Kafka is ideal for log aggregation, particularly for applications that use micro
 
 This is an example Spring Boot application that uses [Log4j2's Kafka appender](https://logging.apache.org/log4j/2.x/manual/appenders.html#KafkaAppender) to send JSON formatted log messages to a Kafka topic.
 
-This application runs for 10 seconds 
+There is now a _Logging_ path and an _Audit_ path.  The path is determined by the presense of an SLF4J "Audit" Marker.
+
+![logging and audig paths](Kafka-Logging.png)
+
+This application runs for 10 seconds.  
 * LogMessageGenerator sends some log messages to a _log_ Kafka topic that's defined in `src/main/resources/log4j2.xml`. Here's an example log message:
 ```
     {
@@ -33,10 +37,18 @@ Here's a two-minute video that walks through the code:
 ## Docker
 You can bring up a local Kafka cluster in Docker using the docker-compose.yml file in _local_
 ```
-docker-compose up
+  docker-compose up
+```
+and 
+```
+  docker-compose down --remove-orphans
 ```
 
 ## To do
 
 1) Inject spring properties for the kafka host names and kafka topic names
-1) include the host name in  the log message
+1) include the host name in  the log message.  Cannot be done in the pattern
+1) Understand what behavior should be if Appender cannot reach the broker
+
+## Questions
+Is the Kafka Appender production hardened for the various broker-down scenarios?
