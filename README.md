@@ -32,7 +32,14 @@ This application runs for 10 seconds.
     }
 ```
 Here's a two-minute video that walks through the code:
+
 [![logging to Kafka from Spring video walk-through](https://img.youtube.com/vi/G7wMwEDkX_4/0.jpg)](https://www.youtube.com/watch?v=G7wMwEDkX_4)
+
+And a couple 10 minute videos:
+
+[![Java Logs and audit to Kafka via Logging - Part 1](https://img.youtube.com/vi/xbbLvpvqTrY/0.jpg)](https://youtu.be/xbbLvpvqTrY)
+[![Viewing Logs and audit in Kafka with KSQL - Part 2](https://i.ytimg.com/vi/nNjSJaun1cE/hqdefault.jpg)](https://youtu.be/nNjSJaun1cE)
+
 
 ## Docker
 You can bring up a local Kafka cluster in Docker using the docker-compose.yml file in _local_

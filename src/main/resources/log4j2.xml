@@ -35,7 +35,7 @@
         </Console>
 
         <Console name="stderr" target="SYSTEM_ERR">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} stderr %highlight{%-5p} [%-7t] %F:%L - %highlight{%m}%n"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %highlight{stderr} %highlight{%-5p} [%-7t] %F:%L - %m%n"/>
             <Filters>
                 <ThresholdFilter level="WARN" onMatch="ACCEPT" />
                 <MarkerFilter marker="${audit.logmarker}" onMatch="DENY" onMismatch="ACCEPT"/>
