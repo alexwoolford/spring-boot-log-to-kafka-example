@@ -14,6 +14,10 @@ public class LogMessageGenerator {
 
     AtomicInteger count = new AtomicInteger(1);
 
+    /**
+    * Generates a log message every second.
+    * The log message is not routed to Audit Appender because no log Marker is provided
+    */
     @Scheduled(fixedDelay = 1000L)
     void logSomeStuff() {
 

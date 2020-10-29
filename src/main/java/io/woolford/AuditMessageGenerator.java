@@ -21,7 +21,8 @@ public class AuditMessageGenerator {
     AtomicInteger count = new AtomicInteger(1);
 
     /**
-     * Generates an audit message every second
+     * Generates a log message every second.
+     * The log message is routed to Audit Appender via the use of a log Marker
      */
     @Scheduled(fixedDelay = 1000L)
     void logSomeStuff() {
