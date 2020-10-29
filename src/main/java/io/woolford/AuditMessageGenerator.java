@@ -37,6 +37,8 @@ public class AuditMessageGenerator {
         foo.put("eventIndex", index);
         foo.put("eventTimestamp", Instant.now().toEpochMilli());
         try {
+            // Convert the Map to JSON and send the raw JSON as the message.
+            // The Audit appender formatter picks that json up and pubishes just the JSON to the topic
             String jsonString = new ObjectMapper().writeValueAsString(foo);
             logger.info(AuditMarker.getMarker(), jsonString);
         } catch (JsonProcessingException e) {
