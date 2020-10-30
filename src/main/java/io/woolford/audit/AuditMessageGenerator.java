@@ -1,4 +1,4 @@
-package io.woolford;
+package io.woolford.audit;
 
 import java.time.Instant;
 import java.util.HashMap;
@@ -30,23 +30,14 @@ public class AuditMessageGenerator {
         int index = count.getAndIncrement();
 
         // If we exposed log4j2 instead of Slf4j then we could have used ObjectMessage
-
-        // We want the body of audit messages to by JSON and match exactly what we want
-        // this works because our pattern string in log4j2.xml is just %message
-        Map<String, Object> foo = new HashMap<String, Object>();
-        foo.put("message", "Audit message generated");
-        foo.put("eventIndex", index);
-        foo.put("eventTimestamp", Instant.now().toEpochMilli());
-        try {
-            // Convert the Map to JSON and send the raw JSON as the message.
-            // The Audit appender formatter picks that json up and pubishes just the JSON to the topic
-            String jsonString = new ObjectMapper().writeValueAsString(foo);
-            logger.info(AuditMarker.getMarker(), jsonString);
-        } catch (JsonProcessingException e) {
-            // should never happen in this example
-            logger.error("impossible error ", e);
-        }
-
+        String jsonString = AuditMessage.builder()
+            .message("Event Message Generated")
+            .index(index)
+            .eventTimestamp(Instant.now())
+            .build()
+            .toJSON();
+        
+        // show audit and regular audit based on the presence of Audit Marker
+        logger.info(AuditMarker.getMarker(), jsonString);
     }
-
 }

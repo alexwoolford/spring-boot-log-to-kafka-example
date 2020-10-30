@@ -52,10 +52,11 @@ and
 ```
 
 ## To do
-
 1) Inject spring properties for the kafka host names and kafka topic names
 1) include the host name in  the log message.  Cannot be done in the pattern
 1) Understand what behavior should be if Appender cannot reach the broker
 
+## Audit code
+Audit code is isolated in the audit package because it was elaborated on more than was probably needed
 ## Questions
 Is the Kafka Appender production hardened for the various broker-down scenarios?

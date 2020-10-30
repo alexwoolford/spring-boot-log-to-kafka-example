@@ -1,4 +1,4 @@
-package io.woolford;
+package io.woolford.audit;
 
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
