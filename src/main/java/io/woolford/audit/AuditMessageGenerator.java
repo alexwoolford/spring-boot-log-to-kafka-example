@@ -1,12 +1,7 @@
 package io.woolford.audit;
 
 import java.time.Instant;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,12 +26,12 @@ public class AuditMessageGenerator {
 
         // If we exposed log4j2 instead of Slf4j then we could have used ObjectMessage
         String jsonString = AuditMessage.builder()
-            .message("Event Message Generated")
-            .index(index)
-            .eventTimestamp(Instant.now())
-            .build()
-            .toJSON();
-        
+                .message("Event Message Generated")
+                .index(index)
+                .eventTimestamp(Instant.now())
+                .build()
+                .toJSON();
+
         // show audit and regular audit based on the presence of Audit Marker
         logger.info(AuditMarker.getMarker(), jsonString);
     }
