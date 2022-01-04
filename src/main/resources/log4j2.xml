@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="info" name="spring-boot-log-to-kafka-example" packages="io.woolford">
     <Properties>
-        <Property name="bootstrap.servers">localhost:9092</Property>
-        <Property name="audit.logmarker">AuditRecord</Property>
-        <Property name="kafka.topic.audit">audit</Property>
-        <Property name="kafka.topic.logs">logs</Property>
+        <Property name="bootstrap.servers">${bundle:env:bootstrap.servers}</Property>
+        <Property name="audit.logmarker">${bundle:env:audit.logmarker}</Property>
+        <Property name="kafka.topic.audit">${bundle:env:kafka.topic.audit}</Property>
+        <Property name="kafka.topic.logs">${bundle:env:kafka.topic.logs}</Property>
     </Properties>
 
-    <!-- Log4J2 JSONLayout objectMessageAsJsonObject not exposed through SLF4j 10/2020 --> 
+    <!-- Log4J2 JSONLayout objectMessageAsJsonObject not exposed through SLF4j 10/2020 -->
     <Appenders>
         <!-- Kafka Audit Appender only forwards messages with the "AuditRecord" marker -->
         <!-- We put only the message here assuming it will be formatted json-->
         <Kafka name="kafkaAuditAppender" topic="${kafka.topic.audit}">
-            <PatternLayout pattern="%message%n"/>
+            <PatternLayout pattern="%message%n" />
             <Property name="bootstrap.servers">${bootstrap.servers}</Property>
-            <MarkerFilter marker="${audit.logmarker}" onMatch="ACCEPT" onMismatch="DENY"/>
+            <MarkerFilter marker="${audit.logmarker}" onMatch="ACCEPT" onMismatch="DENY" />
         </Kafka>
 
         <!-- https://logging.apache.org/log4j/2.x/manual/configuration.html#PropertySubstitution -->
@@ -26,30 +26,30 @@
         <Kafka name="kafkaLogAppender" topic="${kafka.topic.logs}">
             <JSONLayout />
             <Property name="bootstrap.servers">${bootstrap.servers}</Property>
-            <MarkerFilter marker="${audit.logmarker}" onMatch="DENY" onMismatch="ACCEPT"/>
+            <MarkerFilter marker="${audit.logmarker}" onMatch="DENY" onMismatch="ACCEPT" />
         </Kafka>
 
         <Console name="stdout" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} stdout %highlight{%-5p} [%-7t] %F:%L - %m%n"/>
-            <MarkerFilter marker="${audit.logmarker}" onMatch="DENY" onMismatch="ACCEPT"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} stdout %highlight{%-5p} [%-7t] %F:%L - %m%n" />
+            <MarkerFilter marker="${audit.logmarker}" onMatch="DENY" onMismatch="ACCEPT" />
         </Console>
 
         <Console name="stderr" target="SYSTEM_ERR">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} %highlight{stderr} %highlight{%-5p} [%-7t] %F:%L - %m%n"/>
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} %highlight{stderr} %highlight{%-5p} [%-7t] %F:%L - %m%n" />
             <Filters>
                 <ThresholdFilter level="WARN" onMatch="ACCEPT" />
-                <MarkerFilter marker="${audit.logmarker}" onMatch="DENY" onMismatch="ACCEPT"/>
+                <MarkerFilter marker="${audit.logmarker}" onMatch="DENY" onMismatch="ACCEPT" />
             </Filters>
         </Console>
 
     </Appenders>
     <Loggers>
         <Root level="INFO">
-            <AppenderRef ref="kafkaAuditAppender"/>
-            <AppenderRef ref="kafkaLogAppender"/>
+            <AppenderRef ref="kafkaAuditAppender" />
+            <AppenderRef ref="kafkaLogAppender" />
             <!--stdout/stderr included for testing Oozie log4j edits-->
-            <AppenderRef ref="stdout"/>
-            <AppenderRef ref="stderr"/>
+            <AppenderRef ref="stdout" />
+            <AppenderRef ref="stderr" />
         </Root>
         <!-- Do not let org.apache.kafka log to a Kafka appender on DEBUG level. That will cause recursive logging -->
         <Logger name="org.apache.kafka" level="warn" />

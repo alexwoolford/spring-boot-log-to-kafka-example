@@ -51,8 +51,16 @@ and
   docker-compose down --remove-orphans
 ```
 
+You can view the Kafka Topics in the _Confluent Control Center_ at http://localhost:9021/clusters
+
+## Build and run
+1. Build the jar file with `mvn clean package`
+1. Start Kafka in docker - see above
+1. Run the jar file with `java -jar target/spring-boot-log-to-kafka-example-1.0-SNAPSHOT.jar`
+  1. or Run in IDE
+
 ## To do
-1) Inject spring properties for the kafka host names and kafka topic names
+1) Inject spring properties for the kafka host names and kafka topic names - topic names are currently stored in `env.properties` which are injected into `log4j2.xml`
 1) include the host name in  the log message.  Cannot be done in the pattern
 1) Understand what behavior should be if Appender cannot reach the broker
 
